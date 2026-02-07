@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estou retida ou ganhei peso?</title>
+<meta name="description" content="Teste rápido para identificar se o aumento na balança parece mais retenção/inchaço ou um padrão de ganho gradual. Resultado na hora + próximo passo." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#e9dec8;
+  --soft:#fbf8f3;
+  --text:#241f1a;
+  --brand:#7c573d;
+  --stroke: rgba(168,152,137,.55);
+
+  /* novo tom elegante no CTA do protocolo */
+  --sage:#737b4c;
+  --sage2:#646b43;
+
+  --shadow:0 22px 60px rgba(0,0,0,.12);
+  --shadow2:0 14px 34px rgba(0,0,0,.08);
+  --radius:28px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Inter","DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(950px 520px at 20% 0%, rgba(255,255,255,.55), transparent 60%),
+    radial-gradient(900px 520px at 86% 10%, rgba(255,255,255,.35), transparent 60%),
+    linear-gradient(180deg,var(--bg),#efe7d7);
+  color:var(--text);
+}
+.wrap{max-width:900px;margin:auto;padding:22px 14px 96px}
+
+/* topo */
+.top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:18px;gap:10px;flex-wrap:wrap;
+}
+.brand b{
+  display:block;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brand);
+}
+.brand span{
+  font-size:12px;letter-spacing:.14em;color:#555;
+}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{
+  padding:10px 14px;border-radius:999px;
+  background:rgba(255,255,255,.70);
+  border:1px solid rgba(124,87,61,.28);
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;gap:8px;
+  text-decoration:none;color:inherit;
+  box-shadow:var(--shadow2);
+  backdrop-filter: blur(8px);
+}
+.dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--sage);
+  box-shadow:0 0 0 3px rgba(115,123,76,.22);
+}
+
+/* hero */
+.hero{
+  background:rgba(255,255,255,.92);
+  border-radius:var(--radius);
+  padding:30px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--stroke);
+}
+h1{
+  font-family:"Fraunces",serif;
+  font-size:44px;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media (max-width:520px){
+  h1{white-space:normal}
+}
+.desc{
+  margin-top:12px;
+  font-size:16px;
+  line-height:1.75;
+  color:#555;
+  max-width:78ch;
+}
+.desc b{color:rgba(36,31,26,.86)}
+
+/* inputs */
+.form{
+  margin-top:16px;
+  display:grid;
+  gap:10px;
+}
+.form input{
+  width:100%;
+  padding:15px 16px;
+  border-radius:16px;
+  border:1px solid #d1c4b2;
+  font-size:15px;
+  background:#fff;
+}
+.form small{color:#777;font-size:12px}
+
+/* progresso */
+.progress{margin-top:16px;font-size:13px;color:#555}
+.bar{
+  height:6px;background:#e3d6c4;
+  border-radius:10px;overflow:hidden;margin-top:6px;
+}
+.bar span{display:block;height:100%;width:0%;background:var(--brand);transition:.3s}
+
+/* perguntas */
+.q{
+  background:rgba(251,248,243,.95);
+  border-radius:22px;
+  padding:16px;
+  margin-top:14px;
+  border:1px solid rgba(168,152,137,.45);
+  box-shadow:var(--shadow2);
+}
+.q b{
+  font-family:"DM Sans","Inter",system-ui,sans-serif;
+  font-size:15.5px;
+  font-weight:700;
+  letter-spacing:-.01em;
+}
+.opts{display:flex;gap:10px;margin-top:12px}
+.opt{
+  flex:1;
+  padding:13px 12px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #cfc3b2;
+  font-weight:800;
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+  transition: transform .06s ease, filter .06s ease, background .12s ease, border-color .12s ease;
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+.opt:hover{ transform: translateY(-1px); filter: brightness(1.01); }
+.opt.active{
+  background:rgba(124,87,61,.10);
+  border-color:var(--brand);
+  color:var(--brand);
+}
+
+/* ações */
+.actions{margin-top:18px}
+.btn{
+  width:100%;
+  padding:15px 16px;
+  border-radius:18px;
+  border:none;
+  background:var(--brand);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 18px 40px rgba(124,87,61,.30);
+  transition: transform .08s ease, filter .08s ease;
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+.btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+.btn:active{ transform: translateY(0); }
+
+/* resultado */
+.result{
+  display:none;margin-top:22px;
+  background:rgba(255,255,255,.95);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--stroke);
+}
+.result h2{
+  font-family:"Fraunces",serif;
+  font-size:32px;line-height:1.12;
+  margin:0 0 10px;
+}
+.result p{
+  font-family:"DM Sans","Inter",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  color:#555;
+  margin:0;
+}
+.boxInfo{
+  margin-top:14px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#fff,#f8f4ed);
+  border:1px solid #dccfbe;
+  color:#5a5148;
+  line-height:1.7;
+  font-size:15px;
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+
+/* CTAs */
+.cta{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+@media(max-width:720px){ .cta{grid-template-columns:1fr} }
+
+.cta a{
+  display:block;
+  text-align:center;
+  padding:15px 14px;
+  border-radius:18px;
+  font-weight:900;
+  text-decoration:none;
+  user-select:none;
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+.ctaPrimary{
+  background:var(--brand);
+  color:#fff;
+  box-shadow:0 18px 40px rgba(124,87,61,.30);
+}
+.ctaProtocol{
+  background:var(--sage);
+  color:#fff;
+  box-shadow:0 18px 40px rgba(115,123,76,.28);
+}
+.ctaProtocol:hover{ background:var(--sage2); }
+
+.miniNote{
+  margin-top:10px;
+  font-size:12.5px;
+  line-height:1.55;
+  color:rgba(36,31,26,.60);
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+.fine{
+  margin-top:12px;
+  font-size:12.5px;
+  line-height:1.55;
+  color:rgba(36,31,26,.60);
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+
+/* ===== Mobile refinements ===== */
+@media (max-width:520px){
+  .wrap{padding:18px 12px 110px}
+  .hero{padding:22px}
+  h1{font-size:32px;line-height:1.08}
+  .desc{font-size:15px}
+  .chip{padding:9px 12px}
+  .q{padding:14px;border-radius:20px}
+  .q b{font-size:15px}
+  .opt{padding:12px}
+  .btn{padding:14px;border-radius:16px}
+  .result{padding:22px}
+  .result h2{font-size:26px}
+}
+
+/* Sticky CTA (mobile) */
+.sticky{
+  position: fixed;
+  left: 12px; right: 12px; bottom: 12px;
+  display:none;
+  z-index: 50;
+  gap:10px;
+  grid-template-columns:1fr 1fr;
+}
+.sticky a{
+  display:block;
+  padding:14px 12px;
+  border-radius:16px;
+  text-align:center;
+  font-weight:900;
+  text-decoration:none;
+  color:#fff;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  font-family:"Inter","DM Sans",system-ui,sans-serif;
+}
+.sticky .s1{ background:var(--brand); }
+.sticky .s2{ background:var(--sage); }
+@media (max-width:720px){
+  .sticky{ display:grid; }
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand">
+      <b>ANA CAROLINE</b>
+      <span>NUTRICIONISTA</span>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><span class="dot"></span>WhatsApp online</div>
+      <a class="chip" href="https://instagram.com/nutricarolpoa" target="_blank" rel="noopener">@nutricarolpoa</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Estou retida ou ganhei peso?</h1>
+
+    <p class="desc">
+      <b>Pra que serve:</b> identificar se o aumento na balança parece mais <b>retenção/inchaço</b>
+      ou um <b>padrão de ganho gradual</b>. <br>
+      <b>Por que é útil:</b> te mostra o cenário mais provável e te dá um próximo passo simples, sem achismo.
+    </p>
+
+    <div class="form">
+      <input id="name" placeholder="Nome completo *" required>
+      <input id="phone" placeholder="Telefone / WhatsApp *" required inputmode="tel">
+      <input id="insta" placeholder="@ do Instagram (opcional)">
+      <small>* campos obrigatórios</small>
+    </div>
+
+    <div class="progress">
+      Pergunta <span id="step">0</span> de 12
+      <div class="bar"><span id="bar"></span></div>
+    </div>
+  </div>
+
+  <div id="questions"></div>
+
+  <div class="actions">
+    <button class="btn" onclick="calc()">Ver meu resultado</button>
+  </div>
+
+  <div class="result" id="result">
+    <h2 id="title"></h2>
+    <p id="text"></p>
+
+    <div class="boxInfo" id="boxInfo"></div>
+
+    <div class="cta">
+      <a id="sendResult" class="ctaPrimary" target="_blank" rel="noopener">
+        Enviar meu resultado para a nutri
+      </a>
+
+      <a id="goProtocol" class="ctaProtocol" target="_blank" rel="noopener">
+        Quero aplicar o Protocolo 7 agora
+      </a>
+    </div>
+
+    <div class="miniNote">
+      Ao clicar no Protocolo 7, teu resultado vai junto pra facilitar teu atendimento.
+    </div>
+
+    <div class="fine">
+      Conteúdo educativo. Não é diagnóstico e não substitui consulta individual.
+      Se houver inchaço intenso, falta de ar, dor no peito ou inchaço assimétrico, procure atendimento médico.
+    </div>
+  </div>
+
+</div>
+
+<!-- Sticky CTA Mobile (aparece sempre no mobile, útil pra conversão) -->
+<div class="sticky" aria-hidden="true">
+  <a class="s1" href="#result" onclick="scrollToResult()">Meu resultado</a>
+  <a class="s2" id="stickyProtocol" href="#" target="_blank" rel="noopener">Protocolo 7</a>
+</div>
+
+<script>
+/* ===== CONFIG ===== */
+const ANA_WHATS = "5551998673867";
+const TEST_NAME = "Teste: Estou retida ou ganhei peso?";
+const PROTOCOL_BASE = "https://wa.me/5551998673867?text=";
+
+/* ===== PERGUNTAS ===== */
+const questions=[
+  "Seu peso subiu rápido em 24 a 72 horas?",
+  "Você acorda com rosto ou dedos inchados (anel aperta)?",
+  "No fim do dia o pé/tornozelo fica marcado ou o sapato aperta?",
+  "Sua barriga fica estufada e dura (gases) depois de comer?",
+  "Seu intestino está preso ou irregular nos últimos 7 dias?",
+  "Você aumentou sal/ultraprocessados ou comeu mais fora nos últimos 3 dias?",
+  "Você dormiu mal 2 ou mais noites nessa semana?",
+  "Você está perto da menstruação ou no pré-menstrual?",
+  "A roupa apertou de forma mais constante (não só inchaço)?",
+  "Esse aumento está acontecendo há mais de 3 semanas?",
+  "Você aumentou beliscos/porções na última quinzena?",
+  "Você reduziu atividade física ou ficou mais sedentária nas últimas 2 a 4 semanas?"
+];
+
+let answers=new Array(12).fill(undefined);
+const qBox=document.getElementById("questions");
+
+questions.forEach((q,i)=>{
+  const d=document.createElement("div");
+  d.className="q";
+  d.innerHTML=`
+    <b>${q}</b>
+    <div class="opts">
+      <div class="opt" onclick="answer(${i},1,this)">Sim</div>
+      <div class="opt" onclick="answer(${i},0,this)">Não</div>
+    </div>`;
+  qBox.appendChild(d);
+});
+
+function answeredCount(){
+  return answers.filter(v => v === 0 || v === 1).length;
+}
+function updateProgress(){
+  const done=answeredCount();
+  document.getElementById("step").innerText=done;
+  document.getElementById("bar").style.width=(done/12*100)+"%";
+}
+function answer(i,val,el){
+  answers[i]=val;
+  el.parentNode.querySelectorAll(".opt").forEach(o=>o.classList.remove("active"));
+  el.classList.add("active");
+  updateProgress();
+}
+
+function normalizePhone(raw){
+  return (raw || "").replace(/\D/g, "");
+}
+
+function scrollToResult(){
+  const r = document.getElementById("result");
+  if(r && r.style.display === "block"){
+    r.scrollIntoView({ behavior:"smooth", block:"start" });
+  } else {
+    window.scrollTo({ top: 0, behavior:"smooth" });
+  }
+}
+
+/* ===== RESULTADO ===== */
+function calc(){
+  const name=(document.getElementById("name").value||"").trim();
+  const phoneRaw=(document.getElementById("phone").value||"").trim();
+  const phone=normalizePhone(phoneRaw);
+  const insta=(document.getElementById("insta").value||"").trim();
+
+  if(!name || !phone){
+    alert("Por favor, preencha Nome completo e Telefone/WhatsApp.");
+    return;
+  }
+
+  const done = answeredCount();
+  if(done < 8){
+    alert("Responde pelo menos 8 perguntas pra teu resultado ficar mais fiel 🙂");
+    return;
+  }
+
+  const ret=answers.slice(0,8).reduce((a,b)=>a+(b||0),0);
+  const gain=answers.slice(8).reduce((a,b)=>a+(b||0),0);
+
+  let label="", titleBase="", text="", box="";
+
+  if(ret>=4 && gain<=1){
+    label="Retenção provável";
+    titleBase="Parece mais retenção e inchaço";
+    text="O mais provável é retenção. Isso costuma oscilar rápido e melhora quando sono, intestino e rotina entram no lugar.";
+    box="Próximo passo: aplicar o Protocolo 7 por 7 dias pra desinchar e organizar o básico, sem radicalismo. É um começo simples e guiado pra o corpo responder.";
+  } else if(gain>=3 && ret<=2){
+    label="Tendência de ganho gradual";
+    titleBase="Parece uma tendência de ganho gradual";
+    text="Aqui aparece mais um padrão constante (semanas), não só retenção. Normalmente envolve rotina e constância.";
+    box="Próximo passo: aplicar o Protocolo 7 pra organizar a base e sair do modo travado. Depois, com a base pronta, ajustar fica muito mais fácil.";
+  } else if(ret>=3 && gain>=2){
+    label="Misto (retenção + tendência)";
+    titleBase="Parece um misto: retenção + rotina desorganizada";
+    text="Tem sinal de retenção e também de padrão. É comum quando o corpo está inflamando e a rotina está sem direção.";
+    box="Próximo passo: destravar primeiro e depois ajustar pra manter. O Protocolo 7 funciona muito bem como começo prático e possível.";
+  } else {
+    label="Sem sinal claro";
+    titleBase="Não deu um sinal claro (e tá tudo bem)";
+    text="Não ficou forte pra um lado só. Às vezes o corpo oscila por sono, estresse, ciclo e rotina.";
+    box="Próximo passo: aplicar o Protocolo 7 por 7 dias e observar a resposta do corpo com método. Isso tira o achismo e dá clareza.";
+  }
+
+  document.getElementById("title").innerText = titleBase;
+  document.getElementById("text").innerText  = text;
+  document.getElementById("boxInfo").innerText = box;
+
+  const msgToNutri =
+`${TEST_NAME}
+Nome: ${name}
+Telefone: ${phone}
+Instagram: ${insta || "não informou"}
+
+Resultado: ${label}
+Pontuação: Retenção ${ret}/8 | Ganho ${gain}/4`;
+
+  const sendHref = `https://wa.me/${ANA_WHATS}?text=${encodeURIComponent(msgToNutri)}`;
+  document.getElementById("sendResult").href = sendHref;
+
+  const msgProtocol =
+`Quero aplicar o Protocolo 7 agora e iniciar minha mudança.
+
+${TEST_NAME}
+Nome: ${name}
+Telefone: ${phone}
+Instagram: ${insta || "não informou"}
+
+Meu resultado: ${label}
+Pontuação: Retenção ${ret}/8 | Ganho ${gain}/4`;
+
+  const protocolHref = PROTOCOL_BASE + encodeURIComponent(msgProtocol);
+  document.getElementById("goProtocol").href = protocolHref;
+  document.getElementById("stickyProtocol").href = protocolHref;
+
+  document.getElementById("result").style.display="block";
+  document.getElementById("result").scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+updateProgress();
+</script>
+</body>
+</html>
